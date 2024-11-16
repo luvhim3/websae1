@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mission 3</title>
+    <link rel="stylesheet" href="StyleMission3.css">
+</head>
+<body>
+<div class="container">
+    <a href="Accueil.html"><img src="logo_paris_cite.png" alt="Université Paris Cité"></a>
+    <h1>Mission 3</h1>
+</div>
+
+<div class="contain">
+    <h2>1) KDou s’intéresse aux desserts et aux boissons dans sa réflexion en lien avec la santé.</h2>
+    <section>Interprétation : L’intérêt de cette requête est de savoir les boissons et les desserts qui sont coûteux et de voir si c’est possible de changer de fournisseur pour faire plus de bénéfice en changeant de fournisseur. </section>
+    <p>SQL :
+        SELECT DISTINCT P.RefProd, P.NomProd, F.Pays, P.PrixUnit
+        FROM Produit AS P INNER JOIN Fournisseur F
+        ON P.NoFour = F.NoFour
+        WHERE ((P.CodeCateg)=1 Or (P.CodeCateg)=3) AND ((P.PrixUnit)>=50)
+        ORDER BY P.PrixUnit, 1, 2, 3
+        ;
+    </p>
+    <table>
+        <tr>
+            <th>RefProd</th>
+            <th>NomProd</th>
+            <th>Pays</th>
+            <th>PrixUnit</th>
+        </tr>
+        <tr>
+            <td>129</td>
+            <td>Jus Kiwina</td>
+            <td>Royaume-Uni</td>
+            <td>52,00 €</td>
+        </tr>
+        <tr>
+            <td>99</td>
+            <td>Pimm's Jojo</td>
+            <td>Australia</td>
+            <td>55,83 €</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Sir Rodney's Marmalade</td>
+            <td>Royaume Uni</td>
+            <td>67,50 €</td>
+        </tr>
+        <tr>
+            <td>75</td>
+            <td>Rhönbräu Klosterbier</td>
+            <td>Allemagne</td>
+            <td>86,46 €</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Chang</td>
+            <td>Royaume-Uni</td>
+            <td>107,42 €</td>
+        </tr>
+        <tr>
+            <td>35</td>
+            <td>Steeleye Stout</td>
+            <td>États-Unis</td>
+            <td>215,00 €</td>
+        </tr>
+        <tr>
+            <td>38</td>
+            <td>Côte de Blaye</td>
+            <td>France</td>
+            <td>219,58 €</td>
+        </tr>
+        <tr>
+            <td>87</td>
+            <td>Bratislava Vodka</td>
+            <td>Royaume-Uni</td>
+            <td>320,00 €</td>
+        </tr>
+    </table>
+
+    <section>Interprétation:L’intérêt de cette requête est de savoir où se concentre le marché des boissons et des desserts pour avoir un ordre d’idée sur les pays à privilégier pour se réapprovisionner en stock de boissons et de desserts.</section>
+    <section>SQL: SELECT DISTINCT F.Pays
+        FROM Fournisseur AS F INNER JOIN Produit AS P
+        ON F.NoFour = P.NoFour
+        WHERE ((P.CodeCateg)=1 Or (P.CodeCateg)=3)
+    </section>
+    <table>
+        <tr>
+            <th>Pays</th>
+        </tr>
+        <tr>
+            <td>Allemagne</td>
+        </tr>
+        <tr>
+            <td>Australia</td>
+        </tr>
+        <tr>
+            <td>Australie</td>
+        </tr>
+        <tr>
+            <td>Brésil</td>
+        </tr>
+        <tr>
+            <td>Canada</td>
+        </tr>
+        <tr>
+            <td>Etats Unis</td>
+        </tr>
+        <tr>
+            <td>Etats-Unis</td>
+        </tr>
+        <tr>
+            <td>Finlande</td>
+        </tr>
+        <tr>
+            <td>France</td>
+        </tr>
+        <tr>
+            <td>Pays-Bas</td>
+        </tr>
+        <tr>
+            <td>Royaume-Uni</td>
+        </tr>
+        <tr>
+            <td>Singapour</td>
+        </tr>
+        <tr>
+            <td>Suède</td>
+        </tr>
+    </table>
+
+    <h2>2) KDou se demande ce qu’il faut changer dans son offre, voici quelques indicateurs.</h2>
+    <section>Interprétation: On s’intéresse ici au nombre de produits non commandés par catégories. On peut donc reprendre la requête de la question précédente en modifiant la jointure (car on a plus besoin de la table Fournisseur mais de la table Categorie) et en ajoutant un GROUP BY des éléments présents dans le SELECT et un COUNT(C.CodeCateg) (on peut aussi faire COUNT(C.NomCateg)) ce qui permet d’afficher le nombre de produits non commandés par catégorie. </section>
+    <section>SQL: SELECT C.NomCateg, COUNT(C.CodeCateg) AS Produit_Non_Commandé
+        FROM Produit AS P INNER JOIN Categorie C ON P.CodeCateg=C.CodeCateg
+        WHERE P.RefProd NOT IN (SELECT DC.RefProd FROM  DetailCommande DC )
+        GROUP BY C.CodeCateg, C.NomCateg
+    </section>
+    <table>
+        <tr>
+            <th>NomCateg</th>
+            <th>Produit_Non_Commandé</th>
+        </tr>
+        <tr>
+            <td>Boissons</td>
+            <td>27</td>
+        </tr>
+        <tr>
+            <td>Condiments</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Desserts</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Pâtes et céréales</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Poissons et fruits de mer</td>
+            <td>2</td>
+        </tr>
+    </table>
+
+    <section>Interprétation: On veut savoir quels sont les pays qui ont une offre importante de produits donc quels pays ont le plus de commande. On a besoin de 3 tables Fournisseur, Produit et DetailCommande. Ensuite il suffit de faire un COUNT de F.Pays ce qui affichera le nombre de commandes par pays. </section>
+    <section>SQL : SELECT F.Pays, COUNT(*) AS Commande_Par_Pays
+        FROM  Fournisseur AS F INNER JOIN  (Produit AS P INNER JOIN DetailCommande DC ON
+        P.RefProd=DC.RefProd ) ON P.NoFour=F.NoFour
+        GROUP BY F.Pays
+        ORDER BY  COUNT(*) DESC
+    </section>
+    <table>
+        <tr>
+            <th>Pays</th>
+            <th>Commandes par pays</th>
+        </tr>
+        <tr>
+            <td>Allemagne</td>
+            <td>420</td>
+        </tr>
+        <tr>
+            <td>Canada</td>
+            <td>232</td>
+        </tr>
+        <tr>
+            <td>Italie</td>
+            <td>230</td>
+        </tr>
+        <tr>
+            <td>France</td>
+            <td>227</td>
+        </tr>
+        <tr>
+            <td>Etats-Unis</td>
+            <td>186</td>
+        </tr>
+        <tr>
+            <td>Royaume Uni</td>
+            <td>163</td>
+        </tr>
+        <tr>
+            <td>Japon</td>
+            <td>155</td>
+        </tr>
+        <tr>
+            <td>Australie</td>
+            <td>143</td>
+        </tr>
+        <tr>
+            <td>Australia</td>
+            <td>133</td>
+        </tr>
+        <tr>
+            <td>Norvège</td>
+            <td>133</td>
+        </tr>
+        <tr>
+            <td>Royaume-Uni</td>
+            <td>124</td>
+        </tr>
+        <tr>
+            <td>USA</td>
+            <td>117</td>
+        </tr>
+        <tr>
+            <td>Finlande</td>
+            <td>92</td>
+        </tr>
+        <tr>
+            <td>Espagne</td>
+            <td>87</td>
+        </tr>
+        <tr>
+            <td>Suéde</td>
+            <td>74</td>
+        </tr>
+        <tr>
+            <td>Etats Unis</td>
+            <td>73</td>
+        </tr>
+        <tr>
+            <td>Singapour</td>
+            <td>71</td>
+        </tr>
+        <tr>
+            <td>Brésil</td>
+            <td>70</td>
+        </tr>
+        <tr>
+            <td>Danemark</td>
+            <td>56</td>
+        </tr>
+        <tr>
+            <td>Pays-Bas</td>
+            <td>35</td>
+        </tr>
+        <tr>
+            <td>Suède</td>
+            <td>23</td>
+        </tr>
+    </table>
+
+    <h2>3) KDou étudie les provenances de ses produits.</h2>
+    <section>Interprétation:Cette requête permet à KDOU de voir le coût des produits qu’ils achètent en Allemagne et KDOU pourrait grâce aux noms des produits s’ils pourraient trouver ou non une alternative moins chères qui pourrait être plus qualitative.  </section>
+    <section>SQL:SELECT Categorie.NomCateg, Produit.PrixUnit
+        FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour
+        WHERE (((Categorie.NomCateg)="boissons" Or (Categorie.NomCateg)="desserts") AND ((Fournisseur.Pays)="Allemagne") AND ((Produit.PrixUnit)<100))
+        ORDER BY Categorie.NomCateg ;
+    </section>
+    <table>
+        <tr>
+            <th>NomCateg</th>
+            <th>PrixUnit</th>
+            <th>NomProd</th>
+        </tr>
+        <tr>
+            <td>Desserts</td>
+            <td>11,67 €</td>
+            <td>NuNuCa Nuß-Nougat-Creme</td>
+        </tr>
+        <tr>
+            <td>Desserts</td>
+            <td>26,03 €</td>
+            <td>Gumbär Gummibärchen</td>
+        </tr>
+        <tr>
+            <td>Desserts</td>
+            <td>36,58 €</td>
+            <td>Schoggi Schokolade</td>
+        </tr>
+        <tr>
+            <td>Boissons</td>
+            <td>86,46 €</td>
+            <td>Rhönbräu Klosterbier</td>
+        </tr>
+    </table>
+
+    <section>Interprétation:Cette requête permet à KDOU de voir peut être si ces boissons et desserts ne sont pas accessible chez un autre fournisseur qui fait boissons et desserts en même temps. (autre interprétation) KDOU peut aussi utiliser ces requêtes pour comparer les prix entre ses différent fournisseurs et peut être si les prix sont trop élevés aller chez un autre fournisseur ?  </section>
+    <section>SQL:SELECT DISTINCT Fournisseur.Contact
+        FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour
+        WHERE (((Categorie.NomCateg)="boissons" Or (Categorie.NomCateg)="desserts"))
+        ORDER BY Fournisseur.Contact;
+    </section>
+    <table>
+        <tr>
+            <th>Contact</th>
+        </tr>
+        <tr>
+            <td>Alyssa Messata</td>
+        </tr>
+        <tr>
+            <td>Anne Heikkonen</td>
+        </tr>
+        <tr>
+            <td>Bob Rego</td>
+        </tr>
+        <tr>
+            <td>Carlos Diaz</td>
+        </tr>
+        <tr>
+            <td>Chandra Leka</td>
+        </tr>
+        <tr>
+            <td>Chantal Goulet</td>
+        </tr>
+        <tr>
+            <td>Charlie Colley</td>
+        </tr>
+        <tr>
+            <td>Cheryl Saylor</td>
+        </tr>
+        <tr>
+            <td>Claudio Sole</td>
+        </tr>
+        <tr>
+            <td>Dirk Luchte</td>
+        </tr>
+        <tr>
+            <td>Guylène Nodier</td>
+        </tr>
+        <tr>
+            <td>Helena Carbo</td>
+        </tr>
+        <tr>
+            <td>Hug Jhonson</td>
+        </tr>
+        <tr>
+            <td>Ian Devling</td>
+        </tr>
+        <tr>
+            <td>Lars Peterson</td>
+        </tr>
+        <tr>
+            <td>Maric Bein</td>
+        </tr>
+        <tr>
+            <td>Melvin Wilson</td>
+        </tr>
+        <tr>
+            <td>Petra Winkler</td>
+        </tr>
+        <tr>
+            <td>Shelley Burke</td>
+        </tr>
+        <tr>
+            <td>Wendy Mackenzie</td>
+        </tr>
+    </table>
+
+    <h2>4) KDou étudie ses clients et les remises accordées.</h2>
+    <section>Interprétation: Cette requête permet de voir si plusieurs nantais pourraient faire des commandes groupées pour n’avoir qu’une seule commande et ainsi la recevoir en même temps. </section>
+    <section> SQL:SELECT DISTINCT Client.ContactCli
+        FROM (Client INNER JOIN Commande ON Client.CodeCli = Commande.CodeCli) INNER JOIN ((Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour) INNER JOIN DetailCommande ON Produit.RefProd = DetailCommande.RefProd) ON Commande.NoCom = DetailCommande.NoCom
+        WHERE (((Fournisseur.Pays)="Allemagne") AND ((Client.VilleCli)="Nantes"))
+        ORDER BY Client.ContactCli;
+    </section>
+    <table>
+        <tr>
+            <th>Contact Client</th>
+        </tr>
+        <tr>
+            <td>Lino Rodriguez</td>
+        </tr>
+        <tr>
+            <td>Pedro Afonso</td>
+        </tr>
+        <tr>
+            <td>Sven Ottlieb</td>
+        </tr>
+    </table>
+
+    <section>Interprétation:Cette requête peut permettre aux fournisseurs de voir qui de leur client habitent à Besançon pour pouvoir faire une livraison groupée et l’envoyer en même. Ça représenterait alors peut être un gain de temps pour les fournisseurs mais également des économies sur le coût de livraison et de transports des marchandises.  </section>
+    <section>SQL:SELECT Client.ContactCli
+        FROM Client
+        WHERE (((Client.VilleCli)="Besançon"));
+    </section>
+    <table>
+        <tr>
+            <th>Contact Client</th>
+        </tr>
+        <tr>
+            <td>Amaya Christo</td>
+        </tr>
+        <tr>
+            <td>Kevin Festhéo</td>
+        </tr>
+    </table>
+
+    <h2>Nos requêtes: </h2>
+    <h3>Requête de Fabien: </h3>
+    <section>L’intérêt de cette requête est de savoir le top ventes des produits de chez Kdou pour voir les revenus des produits populaire et pouvoir mieux gérer leur stock vu qu’il y a une forte demande mais aussi de voir comment ces produits ont fonctionnées et pas les autres pour améliorer leur communication et leur marketing sur leur produits. Les produits les plus populaires sont situés tout en haut du tableau.  </section>
+    <section>SELECT DISTINCT TOP 9 P.CodeCateg, P.NomProd AS Produit, Max(DC.QteCom) AS QuantiteCommande, Sum(DC.PrixUnitCli) AS Revenu
+        FROM Produit AS P INNER JOIN DetailCommande AS DC ON P.RefProd = DC.RefProd
+        GROUP BY P.CodeCateg, P.NomProd
+        ORDER BY Max(DC.QteCom) DESC
+    </section>
+
+    <img src="Fabien.png" alt="Résultat requête">
+
+    <h3>Requête de Yassine: </h3>
+    <section>Langage naturel et objectif :
+        Combien y-a-t-il de commandes livrées à des clients provenant du même pays que les fournisseurs (commandes internes), à combien s’élève le total des frais de port de ces commandes et à combien s’élève la somme totale de ces commandes.
+    </section>
+    <section>Intérêt de la requête :
+        Cette requête est intéressante pour plusieurs raisons :
+        -	Dans un point de vue écologique, cela permet de voir combien de commandes ne nécessite pas d’énorme export et donc moins polluante pour l’environnement
+        -	Dans un point de vue économique, cela permet de voir la somme totale des frais de ports ainsi que le prix total des commandes (sans prendre en compte les remises clients).
+    </section>
+    <section>Texte de la requête en SQL :
+        SELECT F.Pays, COUNT (CL.Pays) AS Commandes_Internes, SUM(C.Port) AS Frais_De_Port, SUM(DC.QteCom*DC.PrixUnitCli) AS Prix_Total_Commandes
+        FROM Fournisseur F INNER JOIN
+        (Produit P INNER JOIN
+        (DetailCommande DC INNER JOIN
+        ( Commande C INNER JOIN Client CL ON C.CodeCli = CL.CodeCli )
+        ON DC.NoCom=C.NoCom )
+        ON P.RefProd = DC.RefProd )
+        ON F.NoFour= P.NoFour
+        WHERE F.Pays = CL.Pays
+        GROUP BY F.Pays
+    </section>
+
+    <img src="Yassine.png" alt="Résultat requête">
+</div>
+
+</body>
+</html>

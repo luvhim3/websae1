@@ -1,0 +1,101 @@
+body {
+    background-image: url('fond_éco.jpg');
+    font-family: Noto Sans, sans-serif;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #d6ffd7;
+    z-index: 1000;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    box-sizing: border-box;
+
+}
+.contain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin-top: 20px;
+}
+
+
+.container img {
+    border: 2px solid #558724;
+    width: 8vw; /* Taille de l'image proportionnelle à la largeur de l'écran */
+    max-width: 120px;
+    min-width: 50px;
+    height: auto;
+    margin-right: 20px;
+}
+
+
+h1 {
+    background-color: #d6ffd7;
+    color: #000;
+    padding: 10px 20px;
+    border: 2px solid #558724;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 25px auto 20px;
+    text-align: center;
+    font-family: Andale Mono, monospace;
+}
+p, table, section, h2,h1,h3{
+    background-color: #d6ffd7;
+    color: #000;
+    font-size: 20px;
+    padding: 20px 20px;
+    border: 2px solid #558724;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 25px auto 25px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+
+footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #abbaba;
+    color: #000;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}
+@media (max-width: 768px) {
+    body{
+        background-image: url('fond_éco.svg');
+        font-family: Noto Sans, sans-serif;
+        padding-top: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,61 @@
+/* Styles applicables à toutes les tailles d'écran */
+
+body {
+    font-family: Noto Sans, sans-serif;
+    text-align: center;
+    background-color: #7ca677;
+    padding-top: 80px; /* Espace sous la barre fixe */
+}
+
+/* Barre fixe */
+#barre_fixe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #d6ffd7;
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center; /* Centre le contenu verticalement */
+    padding-left: 20px; /* Espace à gauche pour l'image */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Image dans la barre fixe */
+#barre_fixe img {
+    border: 2px solid #558724;
+    width: 8vw; /* Taille de l'image proportionnelle à la largeur de l'écran */
+    max-width: 120px; /* Limite la taille maximale de l'image */
+    min-width: 50px; /* Limite la taille minimale de l'image */
+    height: auto; /* Conserve les proportions */
+    margin-right: 20px; /* Espace entre l'image et le texte */
+}
+
+/* Titre de la barre fixe */
+#barre_fixe p {
+    margin: 0;
+    font-size: 24px;
+    flex: 1; /* Permet de centrer le texte */
+    text-align: center; /* Centre le texte dans la barre */
+}
+
+/* Titre principal */
+h1 {
+    background-color: #d6ffd7;
+    color: #000;
+    padding: 10px 20px;
+    border: 2px solid #558724;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 100px auto 20px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #abbaba;
+    color: #000;
+}

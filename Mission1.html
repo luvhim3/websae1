@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rapport Kdou</title>
+  <link rel="stylesheet" href="StyleMission1.css">
+</head>
+<body>
+
+<div class="container">
+  <a href="Accueil.html"><img src="logo_paris_cite.png" alt="Université Paris Cité"></a>
+  <h1>Mission 1</h1>
+
+</div>
+<div class="list">
+  <ul>
+    CONTEXTE : L'entreprise Kdou fait appel à notre équipe pour améliorer leur image "éco-friendly".
+    Pour cela, il faudra prendre en charge l'évolution de l'organisation et de leur positionnement sur le marché de l'alimentaire tout en respectant une démarche "éco-friendly"
+  </ul>
+  <p>  Dans cette première mission, le but premier est d'analyser les tables et comprendre leur fonctionnement. Pour cela, nous avons répondu à de nombreuses tâches, les voici :</p>
+  <ul class="ListPuce">
+
+    1/ Il faut identifier quelles sont les colonnes pouvant correspondre à des clés primaires.
+
+    <li>
+      FOURNISSEUR : n° fournisseur
+    </li>
+    <li>
+      PRODUIT : réf produit
+    </li>
+    <li>
+      CATEGORIE : code catégorie
+    </li>
+    <li>
+      CLIENTELE : code client
+    </li>
+    <li>
+      COMMANDE : n° commande
+    </li>
+    <li>
+      DETAILS COMMANDE : couple de clés étrangères qui forment une clé primaire -> réf produit + n° commande
+    </li>
+  </ul>
+
+  <ul class="ListPuce">
+    2/ Il faut identifier quelles sont les colonnes correspondant à des clés étrangères
+
+    <li>
+      FOURNISSEUR : Sans cle étrangère
+    </li>
+    <li>
+      PRODUIT : n° fournisseur
+    </li>
+    <li>
+      CATEGORIE : Sans cle étrangère
+    </li>
+    <li>
+      CLIENTELE : Sans cle étrangère
+    </li>
+    <li>
+      COMMANDE : code client
+    </li>
+    <li>
+      DETAILS COMMANDE : couple de clés étrangères -> réf produit + n° commande
+    </li>
+  </ul>
+
+  <ul class="ListAlpha">
+    3/ Manipulation de la table de données
+
+    <li>
+      Combien y a-t-il de clients nantais ?
+      <br>
+      Il y a trois clients Nantais.
+    </li>
+    <li>
+      Combien y a-t-il de clients de région parisienne ?
+      <br>
+      Il y a trois clients Parisiens.
+    </li>
+    <li>
+      Donnez l’adresse du fournisseur Marie Delamare ?
+      <br>
+      L’adresse de Marie Delamare est le 22 rue H. Voiron.
+    </li>
+    <li>
+      Combien y a-t-il de fournisseurs en Amérique du Nord ?
+      <br>
+      Il y a 7 fournisseurs qui viennent d’Amérique du Nord (mais il faut chercher chaque pays précis).
+    </li>
+    <li>
+      Combien y a-t-il de pays dans l’UE autre que la France ?
+      <br>
+      Il y a 7 pays de l’Union Européenne.
+    </li>
+    <li>
+      Quelle est la fonction du contact fournisseur Ma maison ?
+      <br>
+      La fonction du contact fournisseur « Ma maison » est directeur marketing.
+    </li>
+    <li>
+      Quelle est la fonction de contact fournisseur la plus représentée ?
+      <br>
+      La fonction de fournisseur la plus représentée est « représentant/e » avec le total de 8.
+    </li>
+    <li>
+      Quels produits (nom, catégorie et prix) a commandé le client Mikal Pavbo ?
+      <br>
+      Mikal Pavbo s’appelle en réalité Mikal Torin et il a commandé 40 produits au prix de 12.8 euros.
+    </li>
+    <li>
+      Quelles sont les dates des commandes du client MORIU ?
+      <br>
+      Le client avec le code MORJU a commandé aux dates suivantes :
+      <br>
+      03/12/20,
+      06/12/20,
+      27/12/20,
+      17/01/21,
+      20/02/21,
+      07/03/21,
+      11/03/21,
+      24/03/21,
+      24/04/21,
+      16/06/21,
+      30/06/21,
+      06/12/21.
+    </li>
+    <li>
+      Donnez l’offre de produits suédois.
+      <br>
+      Les offres de produits des Suédois sont des viandes.
+    </li>
+    <li>
+      Quelles sont les catégories de produit vendues par les fournisseurs Singapouriens ?
+      <br>
+      Les Singapouriens vendent des poissons, des fruits de mer ainsi que des escargots.
+    </li>
+    <li>
+      Est-ce qu’il y a dans la clientèle des clients qui n’ont pas passé de commande ?
+      <br>
+      Oui, il y a un client par exemple, Isra Dubois, qui n’a pas passé commande.
+    </li>
+    <li>
+      Comment sont conditionnés les produits ?
+      <br>
+      Les produits sont conditionnés de façon à ce qu’ils soient dans les catégories suivantes :
+      <br>
+      - boissons, cafés, thés, alcools
+      <br>
+      - sauces, assaisonnements, épices
+      <br>
+      - desserts et friandises
+      <br>
+      - fromages
+      <br>
+      - pains, biscuits, pâtes, céréales
+      <br>
+      - viandes préparées
+      <br>
+      - fruits secs, raisins, autres
+      <br>
+      - poissons, fruits de mer, escargots
+    </li>
+  </ul>
+  <ul>
+    4/ Analyse des données fournies :
+    <li class="ListVide">
+      On peut remarquer qu’utiliser les noms de villes en clés primaires peut être un choix discutable, car un nom de ville peut se répéter plusieurs fois, or une clé primaire se doit d’être unique.
+    </li>
+  </ul>
+  <ul>
+    5/ Idées d’amélioration de l’organisation de ces données :
+    <li class="ListVide">
+      Utilisation d'un code unique pour les fournisseurs pour ensuite retrouver leur pays et leur ville, ainsi que leur nombre et leur fonction.
+    </li>
+  </ul>
+  <p>
+    BILAN : Après avoir parcouru cette Base de Données,
+    nous pouvons constater qu'il y a certain problème qui peut nous empêcher une bonne prise en main de la Base de Données.
+    Tout d'abord dans la question 3.h il nous est demandé de chercher une personne au nom de "Mikal Pavbo".
+    Cependant, dans notre table son nom est enregistré sous le nom de "Mikal Torin" et cela pose un problème dans notre recherche,
+    car l'on ne peut pas savoir si c'est bien "Mikal Pavbo" et pouvoir répondre à cette demande de recherche.
+    De plus dans la table fournisseur le nom des pays son écrit de manière différente par exemple :
+    les "États-Unis" possèdent 3 façons d'écrire "Etats-Unis", "Etats Unis", "USA" avec ces différences la recherche devient plus compliqués d'autant plus qu'il y a d'autre pays dans ce cas-là.
+    Pour finir l'utilisation d'Excel est plutôt limité,
+    car l'on n'a pas la possibilité de faire des requêtes précise et plus approfondi,
+    c'est pour cela que l'utilisation de Access est plus appropriés dans la démarche d'amélioration de l'entreprise Kdou
+  </p>
+</div>
+<footer>
+  Pour un autre super site comme celui-ci, contactez nous à <strong>prenom.nom@etu.u-paris.fr</strong> (l'élève que vous appréciez le plus de ce groupe formidable)
+</footer>
+</body>
+</html>
